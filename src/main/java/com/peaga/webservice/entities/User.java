@@ -1,5 +1,6 @@
 package com.peaga.webservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -27,6 +29,10 @@ public class User implements Serializable {
         this.email = email;
         this.phone = phone;
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     public Integer getId() {
