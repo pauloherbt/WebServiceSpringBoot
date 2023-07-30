@@ -3,7 +3,6 @@ package com.peaga.webservice.services;
 import com.peaga.webservice.entities.User;
 import com.peaga.webservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
