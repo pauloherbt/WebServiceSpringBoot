@@ -12,14 +12,17 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Instant instant;
+    private Integer orderStatus; //tratar como integer para facilitar manutencao
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    public Order(Integer id, Instant instant, User client) {
+
+    public Order(Integer id, Instant instant, User client, OrderStatus orderStatus) {
         this.id = id;
         this.instant = instant;
         this.client = client;
+        setOrderStatus(orderStatus);
     }
 
     public Order() {
@@ -47,6 +50,13 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus.getId();
     }
 
     @Override
