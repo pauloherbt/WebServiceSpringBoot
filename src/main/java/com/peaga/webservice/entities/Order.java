@@ -1,5 +1,6 @@
 package com.peaga.webservice.entities;
 
+import com.peaga.webservice.enums.OrderStatus;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

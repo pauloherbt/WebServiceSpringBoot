@@ -1,4 +1,4 @@
-package com.peaga.webservice.entities;
+package com.peaga.webservice.enums;
 
 public enum OrderStatus {
     WAITING_PAYMENT(1),
