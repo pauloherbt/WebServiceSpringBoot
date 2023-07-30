@@ -27,4 +27,5 @@ public class UserResource {
     public void deleteById(@PathVariable int id){
         userService.deleteById(id);
     }
+
 }
