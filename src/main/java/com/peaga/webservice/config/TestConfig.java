@@ -2,10 +2,7 @@ package com.peaga.webservice.config;
 
 import com.peaga.webservice.entities.*;
 import com.peaga.webservice.enums.OrderStatus;
-import com.peaga.webservice.repositories.CategoryRepository;
-import com.peaga.webservice.repositories.OrderRepository;
-import com.peaga.webservice.repositories.ProductRepository;
-import com.peaga.webservice.repositories.UserRepository;
+import com.peaga.webservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +22,8 @@ public class TestConfig implements CommandLineRunner {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,6 +47,22 @@ public class TestConfig implements CommandLineRunner {
         Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
         Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 
+        p1.getCategories().add(cat2);
+        p2.getCategories().add(cat1);
+        p2.getCategories().add(cat3);
+        p3.getCategories().add(cat3);
+        p4.getCategories().add(cat3);
+        p5.getCategories().add(cat2);
+
         productRepository.saveAll(List.of(p1,p2,p3,p4,p5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(List.of(oi1,oi2,oi3,oi4));
+
+
     }
 }
