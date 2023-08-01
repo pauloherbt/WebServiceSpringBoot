@@ -1,5 +1,6 @@
 package com.peaga.webservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,7 +18,8 @@ public class Product implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name="category_id"))
     private Set<Category> categories = new HashSet<>(); //alteramos para Set pois o produto so tem 1 tipo de categorias
-
+    @ManyToMany(mappedBy = "id.product")
+    private Set<OrderItem> orderItems = new HashSet<>();
     public Product(Integer id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
@@ -71,6 +73,15 @@ public class Product implements Serializable {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders(){
+        Set<Order> aux = new HashSet<>();
+        for (OrderItem order : orderItems) {
+            aux.add(order.getOrder());
+        }
+        return aux;
     }
 
     @Override
