@@ -18,7 +18,7 @@ public class Product implements Serializable {
     @ManyToMany
     @JoinTable(name = "tb_product_category",joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name="category_id"))
     private Set<Category> categories = new HashSet<>(); //alteramos para Set pois o produto so tem 1 tipo de categorias
-    @ManyToMany(mappedBy = "id.product")
+    @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> orderItems = new HashSet<>();
     public Product(Integer id, String name, String description, Double price, String imgUrl) {
         this.id = id;

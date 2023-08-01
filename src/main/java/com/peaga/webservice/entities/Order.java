@@ -1,5 +1,6 @@
 package com.peaga.webservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.peaga.webservice.enums.OrderStatus;
 import jakarta.persistence.*;
 
@@ -60,7 +61,6 @@ public class Order implements Serializable {
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
     }
-
     public Set<OrderItem> getItens() {
         return itens;
     }
