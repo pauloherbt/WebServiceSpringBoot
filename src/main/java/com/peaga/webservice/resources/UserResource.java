@@ -5,7 +5,9 @@ import com.peaga.webservice.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -15,6 +17,12 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+    @PostMapping
+    public ResponseEntity<User> insert(@RequestBody User obj){
+        obj=userService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").build(obj.getId()); //location onde foi inserido
+        return ResponseEntity.created(uri).body(obj);
+    }
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok().body(userService.findAll());
@@ -23,9 +31,16 @@ public class UserResource {
     public ResponseEntity<User> findById(@PathVariable int id){
         return ResponseEntity.ok().body(userService.findById(id));
     }
-    @GetMapping(value = "/del/{id}")
-    public void deleteById(@PathVariable int id){
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable int id){
         userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> update(@PathVariable Integer id, @RequestBody User obj){
+        obj=userService.update(id,obj);
+        return ResponseEntity.ok().body(obj);
+    }
+
 
 }

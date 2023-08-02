@@ -36,7 +36,13 @@ public class Order implements Serializable {
 
     public Order() {
     }
-
+    public Double getTotal(){
+        double sum=0;
+        for (OrderItem item : itens) {
+            sum+=item.getSubtotal();
+        }
+        return sum;
+    }
     public Payment getPayment() {
         return payment;
     }

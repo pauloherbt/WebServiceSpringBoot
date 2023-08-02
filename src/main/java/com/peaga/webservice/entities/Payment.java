@@ -14,7 +14,7 @@ public class Payment implements Serializable {
     private Integer id;
     private Instant moment;
     @OneToOne
-    @MapsId
+    @MapsId //mapeia de acordo com o id do pedido
     private Order order;
 
     public Payment(Integer id, Instant moment, Order order) {
