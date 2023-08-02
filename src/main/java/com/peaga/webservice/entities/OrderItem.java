@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.peaga.webservice.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -27,6 +24,9 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
     public OrderItem() {
+    }
+    public Double getSubtotal(){
+        return getQuantity()*getPrice();
     }
     @JsonIgnore
     public Order getOrder(){

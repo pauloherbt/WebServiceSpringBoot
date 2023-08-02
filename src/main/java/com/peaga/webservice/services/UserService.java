@@ -12,6 +12,10 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    public User insert(User obj){
+       return userRepository.save(obj);
+    }
     public List<User> findAll(){
         return userRepository.findAll();
     }
@@ -21,5 +25,15 @@ public class UserService {
     }
     public void deleteById(int id){
         userRepository.deleteById(id);
+    }
+    public User update(Integer id,User obj){
+        User aux = userRepository.getReferenceById(id);
+        if(obj.getName()!=null)
+            aux.setName(obj.getName());
+        if(obj.getEmail()!=null)
+            aux.setEmail(obj.getEmail());
+        if(obj.getPhone()!=null)
+            aux.setPhone(obj.getPhone());
+        return userRepository.save(aux);
     }
 }

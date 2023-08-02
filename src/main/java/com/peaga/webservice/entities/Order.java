@@ -1,5 +1,6 @@
 package com.peaga.webservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.peaga.webservice.enums.OrderStatus;
 import jakarta.persistence.*;
 
@@ -22,6 +23,8 @@ public class Order implements Serializable {
     private User client;
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> itens = new HashSet<>();
+    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
+    private Payment payment;
 
 
     public Order(Integer id, Instant instant, User client, OrderStatus orderStatus) {
@@ -32,6 +35,20 @@ public class Order implements Serializable {
     }
 
     public Order() {
+    }
+    public Double getTotal(){
+        double sum=0;
+        for (OrderItem item : itens) {
+            sum+=item.getSubtotal();
+        }
+        return sum;
+    }
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public Integer getId() {
@@ -60,7 +77,6 @@ public class Order implements Serializable {
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(orderStatus);
     }
-
     public Set<OrderItem> getItens() {
         return itens;
     }
