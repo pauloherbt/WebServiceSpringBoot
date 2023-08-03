@@ -52,6 +52,13 @@
             <artifactId>maven-core</artifactId>
             <version>3.6.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.6.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
