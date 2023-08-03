@@ -1,1 +1,1 @@
-web: java -jar /workspace/target/webService
+web: java -jar target/webService-0.0.1-SNAPSHOT
