@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Vendedor</title>
+    <link rel="stylesheet" type="text/css" href="CadastrarVendedor.css" media="screen" />
+</head>
+
+<body>
+<h1>Preencha os dados do vendedor</h1>
+<form action="/users/ins" method="post">
+    <label>Nome: <input type="text" name="name" placeholder="Digite seu nome"></label>
+    <label> Email: <input type="email" name="email" placeholder="Digite seu email"></label>
+    <label> Data de nascimento: <input type="date" name="data" placeholder="Digite a data que você nasceu"></label>
+    <label> Telefone: <input type="text" name="phone" placeholder="Digite seu telefone"></label>
+    <label> Senha: <input type="text" name="password" placeholder="crie uma senha"></label>
+    <input type="submit" value="Enviar">
+</form>
+</body>
+</html>
