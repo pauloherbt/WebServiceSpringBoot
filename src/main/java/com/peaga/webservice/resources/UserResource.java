@@ -17,8 +17,8 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity<User> insert(@RequestBody User obj){
+    @PostMapping(value = "/ins")
+    public ResponseEntity<User> insert(User obj){
         obj=userService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").build(obj.getId()); //location onde foi inserido
         return ResponseEntity.created(uri).body(obj);
